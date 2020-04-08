@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CurrencyActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingStart="14dp"
+        >
+
+        <TextView
+            android:id="@+id/label_conta"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_conta"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+            android:id="@+id/text_conta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2050 / 01.111222-4"
+            android:layout_below="@id/label_conta"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+            android:id="@+id/label_saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_saldo"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/text_conta"
+            android:textColor="@android:color/white"
+            />
+
+
+        <TextView
+            android:id="@+id/text_saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 1.000,00"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/label_saldo"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/white"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="14dp"
+            android:text="Recentes"
+            android:layout_marginBottom="5dp"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
