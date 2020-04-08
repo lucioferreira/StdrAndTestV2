@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>{
 
 
-    private CurrencyDataset customerDs;
+//    private CurrencyDataset customerDs;
+    private ArrayList<BankRecordItem> customerDs;
     private LayoutInflater inflater;
 
-    public CurrencyAdapter(Context context, CurrencyDataset ds) {
+    public CurrencyAdapter(Context context, ArrayList<BankRecordItem> ds) {
         inflater = LayoutInflater.from(context);
         this.customerDs = ds;
     }
@@ -27,17 +30,18 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
 
     @Override
     public int getItemCount() {
-        return customerDs.getRecItems().size();
+        return customerDs.size();
     }
 
     @Override
     public void onBindViewHolder(CurrencyViewHolder holder, int position) {
-        BankRecordItem current = customerDs.getRecItems().get(position);
+        BankRecordItem current = customerDs.get(position);
         holder.setData(current, position);
 //        holder.setListeners();
     }
 
     class CurrencyViewHolder extends RecyclerView.ViewHolder {
+        private TextView title;
         private TextView description;
         private TextView date;
         private TextView value;
@@ -46,13 +50,15 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
 
         public CurrencyViewHolder(View itemView) {
             super(itemView);
+            title = (TextView) itemView.findViewById(R.id.text_title);
             description = (TextView)  itemView.findViewById(R.id.text_description);
             date = (TextView)  itemView.findViewById(R.id.text_date);
             value = (TextView)  itemView.findViewById(R.id.text_value);
         }
 
         public void setData(BankRecordItem currentObject, int position) {
-            this.description.setText(currentObject.getDescription());
+            this.title.setText(currentObject.getTitle());
+            this.description.setText(currentObject.getTitle());
             this.date.setText(currentObject.getDate());
             this.value.setText("R$ " + String.format("%.2f",currentObject.getValue()));
             this.position = position;

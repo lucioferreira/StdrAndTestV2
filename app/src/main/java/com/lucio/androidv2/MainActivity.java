@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 progressDialog = new ProgressDialog(MainActivity.this);
-                progressDialog.setMessage("Finding ....");
+                progressDialog.setMessage("Login in....");
                 progressDialog.show();
                 getUserData();
 
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getUserData() {
-        /*Create handle for the RetrofitInstance interface*/
         CustomerDataService service = RfClient.getRetrofitInstance().create(CustomerDataService.class);
 
         Call<Customer> call = service.getAllCustomer("test_user", "Test@1");
@@ -98,9 +97,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillCustomerData(Customer customer){
 
-        // TODO: objeto chegando nulo aqui
-        CurrencyDataset cds = new CurrencyDataset(customer.getName(), customer.getBankAccount());
+        CurrencyDataset cds = new CurrencyDataset(customer.userAccount.getName(), customer.userAccount.getBankAccount());
+        Intent intent = new Intent(MainActivity.this, CurrencyActivity.class);
 
+        intent.putExtra("id", customer.userAccount.getUserId());
+        intent.putExtra("name", customer.userAccount.getName());
+        intent.putExtra("account", customer.userAccount.getBankAccount());
+        intent.putExtra("agency", customer.userAccount.getAgency());
+        intent.putExtra("balance", String.format("%.2f", customer.userAccount.getBalance()));
+
+        startActivity(intent);
     }
 
 }

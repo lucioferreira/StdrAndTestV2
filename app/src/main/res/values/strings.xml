@@ -7,4 +7,6 @@
     <string name="text_saldo">Saldo</string>
     <string name="logout">Log Out</string>
     <string name="recentes">Recentes</string>
+    <string name="pagamento">Pagamento</string>
+
 </resources>
