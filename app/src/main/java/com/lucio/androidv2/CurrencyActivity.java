@@ -49,12 +49,10 @@ public class CurrencyActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                if( menuItem.getItemId() == R.id.menu_logout){
+                if (menuItem.getItemId() == R.id.menu_logout) {
                     Intent intent = new Intent(CurrencyActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-
-//                    Toast.makeText(CurrencyActivity.this, "logout", Toast.LENGTH_LONG).show();
                 }
 
                 return true;
@@ -65,7 +63,7 @@ public class CurrencyActivity extends AppCompatActivity {
 
     }
 
-    void getUserData(int id){
+    void getUserData(int id) {
 
         progressDialog = new ProgressDialog(CurrencyActivity.this);
         progressDialog.setMessage("Fetching statements....");
@@ -90,18 +88,11 @@ public class CurrencyActivity extends AppCompatActivity {
         });
     }
 
-    private CurrencyDataset GetDatasetFilled() {
-        CurrencyDataset cds = new CurrencyDataset("Lucio Ferreira", "123456789-0");
-        cds.addBankRecordItem(new BankRecordItem("Luz", "Conta de luz", "01/01/2020", 13.0));
-        cds.addBankRecordItem(new BankRecordItem("Agua", "Conta de água", "02/01/2020", 14.0));
-        return cds;
-    }
-
-    private void fillStatementData(UserStatement item){
+    private void fillStatementData(UserStatement item) {
 
         recItems = item.getItems();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id. recycler_currency);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_currency);
         CurrencyAdapter adapter = new CurrencyAdapter(this, recItems);
         recyclerView.setAdapter(adapter);
 

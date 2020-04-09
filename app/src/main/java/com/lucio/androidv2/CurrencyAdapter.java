@@ -9,10 +9,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>{
+public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder> {
 
 
-//    private CurrencyDataset customerDs;
+    //    private CurrencyDataset customerDs;
     private ArrayList<BankRecordItem> customerDs;
     private LayoutInflater inflater;
 
@@ -51,23 +51,22 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         public CurrencyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.text_title);
-            description = (TextView)  itemView.findViewById(R.id.text_description);
-            date = (TextView)  itemView.findViewById(R.id.text_date);
-            value = (TextView)  itemView.findViewById(R.id.text_value);
+            description = (TextView) itemView.findViewById(R.id.text_description);
+            date = (TextView) itemView.findViewById(R.id.text_date);
+            value = (TextView) itemView.findViewById(R.id.text_value);
         }
 
         public void setData(BankRecordItem currentObject, int position) {
             this.title.setText(currentObject.getTitle());
             this.description.setText(currentObject.getTitle());
             this.date.setText(currentObject.getDate());
-            this.value.setText("R$ " + String.format("%.2f",currentObject.getValue()));
+            this.value.setText("R$ " + String.format("%.2f", currentObject.getValue()));
             this.position = position;
             this.currentItem = currentObject;
         }
 
 
     }
-
 
 
 }

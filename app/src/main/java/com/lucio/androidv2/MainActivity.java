@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = editUser.getText().toString();
                 String password = editPassword.getText().toString();
 
-                if( (!isValidUsername(username)) || (!isValidPassword(password)) ){
+                if ((!isValidUsername(username)) || (!isValidPassword(password))) {
                     Toast.makeText(MainActivity.this, "Invalid user name or password", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isValidUsername(String user){
-        if(user.isEmpty()){
+    private boolean isValidUsername(String user) {
+        if (user.isEmpty()) {
             return false;
         }
         return (isValidCpf(user) || isValidEmail(user));
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
-    private boolean isValidCpf(String cpf){
+    private boolean isValidCpf(String cpf) {
         Pattern pattern = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}-?[0-9]{2}");
         Matcher matcher = pattern.matcher(cpf);
         return matcher.find();
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void fillCustomerData(Customer customer){
+    private void fillCustomerData(Customer customer) {
 
         Intent intent = new Intent(MainActivity.this, CurrencyActivity.class);
 
@@ -136,10 +136,11 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(getString(R.string.username_preference_key), editUser.getText().toString());
         String password = editPassword.getText().toString();
         editor.putString(getString(R.string.password_preference_key), encryptPassword(password));
-        editor.apply();;
+        editor.apply();
+        ;
     }
 
-    private String encryptPassword(String message){
+    private String encryptPassword(String message) {
         CryptHelper ch = new CryptHelper();
         String messageEncrypted = "";
         try {
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         return messageEncrypted;
     }
 
-    private String decryptPassword(String message){
+    private String decryptPassword(String message) {
         CryptHelper ch = new CryptHelper();
         String messageDecrypted = "";
         try {
