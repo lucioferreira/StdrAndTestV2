@@ -13,6 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.lucio.androidv2.helper.CryptHelper;
+import com.lucio.androidv2.network.Customer;
+import com.lucio.androidv2.network.CustomerDataService;
+import com.lucio.androidv2.network.RfClient;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -1,4 +1,4 @@
-package com.lucio.androidv2;
+package com.lucio.androidv2.helper;
 
 import android.util.Base64;
 

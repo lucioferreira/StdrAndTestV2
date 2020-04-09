@@ -1,6 +1,7 @@
-package com.lucio.androidv2;
+package com.lucio.androidv2.network;
 
 import com.google.gson.annotations.SerializedName;
+import com.lucio.androidv2.network.BankRecordItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.lucio.androidv2;
+package com.lucio.androidv2.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

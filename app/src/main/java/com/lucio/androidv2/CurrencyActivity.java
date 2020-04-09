@@ -12,6 +12,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lucio.androidv2.network.BankRecordItem;
+import com.lucio.androidv2.network.BankRecordItemDataService;
+import com.lucio.androidv2.network.RfClient;
+import com.lucio.androidv2.network.UserStatement;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;

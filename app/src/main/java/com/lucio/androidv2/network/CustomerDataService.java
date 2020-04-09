@@ -1,4 +1,4 @@
-package com.lucio.androidv2;
+package com.lucio.androidv2.network;
 
 import retrofit2.Call;
 import retrofit2.http.FormUrlEncoded;
