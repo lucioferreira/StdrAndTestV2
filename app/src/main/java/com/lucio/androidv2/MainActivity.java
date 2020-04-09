@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (sharedPref.contains(getString(R.string.password_preference_key))) {
             String password = sharedPref.getString(getString(R.string.password_preference_key), "");
-            editPassword.setText(encryptPassword(password));
+            editPassword.setText(decryptPassword(password));
         }
     }
 
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.username_preference_key), editUser.getText().toString());
         String password = editPassword.getText().toString();
-        editor.putString(getString(R.string.password_preference_key), decryptPassword(password));
+        editor.putString(getString(R.string.password_preference_key), encryptPassword(password));
         editor.apply();;
     }
 

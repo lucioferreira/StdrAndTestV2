@@ -50,7 +50,11 @@ public class CurrencyActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 if( menuItem.getItemId() == R.id.menu_logout){
-                    Toast.makeText(CurrencyActivity.this, "logout", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(CurrencyActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+//                    Toast.makeText(CurrencyActivity.this, "logout", Toast.LENGTH_LONG).show();
                 }
 
                 return true;
