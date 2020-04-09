@@ -9,4 +9,7 @@
     <string name="recentes">Recentes</string>
     <string name="pagamento">Pagamento</string>
 
+    <string name="username_preference_key">username</string>
+    <string name="password_preference_key">password</string>
+
 </resources>

@@ -1,7 +1,9 @@
 package com.lucio.androidv2;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -35,30 +37,35 @@ public class MainActivity extends AppCompatActivity {
         editUser = (EditText) findViewById(R.id.edittext_user);
         editPassword = (EditText) findViewById(R.id.edittext_password);
 
+        loadUserPreferences();
+
         buttonLogin = findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
+                String username = editUser.getText().toString();
+                String password = editPassword.getText().toString();
+
+                if( (!isValidUsername(username)) || (!isValidPassword(password)) ){
+                    Toast.makeText(MainActivity.this, "Invalid user name or password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 progressDialog = new ProgressDialog(MainActivity.this);
-                progressDialog.setMessage("Login in....");
+                progressDialog.setMessage("Authenticating....");
                 progressDialog.show();
+
                 getUserData();
 
+                saveUserPreferences();
 
-//                String username = editUser.getText().toString();
-//                if(!isUsernameValid(username)){
-//                    Toast.makeText(MainActivity.this, "username inválido", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-
-//                Intent intent = new Intent(MainActivity.this, CurrencyActivity.class);
-//                startActivity(intent);
             }
         });
     }
 
-    private boolean isUsernameValid(String user){
+    private boolean isValidUsername(String user){
         if(user.isEmpty()){
             return false;
         }
@@ -72,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean isValidCpf(String cpf){
         Pattern pattern = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}-?[0-9]{2}");
         Matcher matcher = pattern.matcher(cpf);
+        return matcher.find();
+    }
+
+    public boolean isValidPassword(String password) {
+        Pattern pattern = Pattern.compile("(?=.*[A-Z])(?=.*[@$%&#])(?=.*[0-9a-z])");
+        Matcher matcher = pattern.matcher(password);
         return matcher.find();
     }
 
@@ -97,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillCustomerData(Customer customer){
 
-        CurrencyDataset cds = new CurrencyDataset(customer.userAccount.getName(), customer.userAccount.getBankAccount());
         Intent intent = new Intent(MainActivity.this, CurrencyActivity.class);
 
         intent.putExtra("id", customer.userAccount.getUserId());
@@ -107,6 +119,24 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("balance", String.format("%.2f", customer.userAccount.getBalance()));
 
         startActivity(intent);
+    }
+
+    private void loadUserPreferences() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        if (sharedPref.contains(getString(R.string.username_preference_key))) {
+            editUser.setText(sharedPref.getString(getString(R.string.username_preference_key), ""));
+        }
+        if (sharedPref.contains(getString(R.string.password_preference_key))) {
+            editPassword.setText(sharedPref.getString(getString(R.string.password_preference_key), ""));
+        }
+    }
+
+    private void saveUserPreferences() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.username_preference_key), editUser.getText().toString());
+        editor.putString(getString(R.string.password_preference_key), editPassword.getText().toString());
+        editor.apply();;
     }
 
 }
