@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 getUserData();
 
                 saveUserPreferences();
-
             }
         });
     }
@@ -127,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
             editUser.setText(sharedPref.getString(getString(R.string.username_preference_key), ""));
         }
         if (sharedPref.contains(getString(R.string.password_preference_key))) {
-            editPassword.setText(sharedPref.getString(getString(R.string.password_preference_key), ""));
+            String password = sharedPref.getString(getString(R.string.password_preference_key), "");
+            editPassword.setText(encryptPassword(password));
         }
     }
 
@@ -135,8 +135,33 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.username_preference_key), editUser.getText().toString());
-        editor.putString(getString(R.string.password_preference_key), editPassword.getText().toString());
+        String password = editPassword.getText().toString();
+        editor.putString(getString(R.string.password_preference_key), decryptPassword(password));
         editor.apply();;
+    }
+
+    private String encryptPassword(String message){
+        CryptHelper ch = new CryptHelper();
+        String messageEncrypted = "";
+        try {
+            messageEncrypted = ch.encrypt(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return messageEncrypted;
+    }
+
+    private String decryptPassword(String message){
+        CryptHelper ch = new CryptHelper();
+        String messageDecrypted = "";
+        try {
+            messageDecrypted = ch.decrypt(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return messageDecrypted;
     }
 
 }
