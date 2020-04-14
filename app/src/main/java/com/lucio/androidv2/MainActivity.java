@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lucio.androidv2.helper.CryptHelper;
+import com.lucio.androidv2.helper.Login;
 import com.lucio.androidv2.network.Customer;
 import com.lucio.androidv2.network.CustomerDataService;
 import com.lucio.androidv2.network.RfClient;
@@ -52,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 String username = editUser.getText().toString();
                 String password = editPassword.getText().toString();
 
-                if ((!isValidUsername(username)) || (!isValidPassword(password))) {
+                Login login = new Login();
+
+                if ((!login.isValidUsername(username)) || (!login.isValidPassword(password))) {
                     Toast.makeText(MainActivity.this, "Invalid user name or password", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.setMessage("Authenticating....");
                 progressDialog.show();
 
-                getUserData();
+                getUserData(username, password);
 
                 saveUserPreferences();
             }
@@ -91,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
         return matcher.find();
     }
 
-    private void getUserData() {
+    private void getUserData(String username, String password) {
         CustomerDataService service = RfClient.getRetrofitInstance().create(CustomerDataService.class);
 
-        Call<Customer> call = service.getAllCustomer("test_user", "Test@1");
+        Call<Customer> call = service.getAllCustomer(username, password);
         call.enqueue(new Callback<Customer>() {
 
             @Override
@@ -112,6 +115,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillCustomerData(Customer customer) {
+
+        if(customer.userAccount.getName() == null){
+            Toast.makeText(MainActivity.this, customer.error.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Intent intent = new Intent(MainActivity.this, CurrencyActivity.class);
 
